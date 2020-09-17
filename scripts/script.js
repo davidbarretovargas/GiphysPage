@@ -1,4 +1,3 @@
-/* Cambio de icono del menu */
 document.getElementById('btn-menu').addEventListener('click', () => {
         let iconb = document.getElementById('bars');
         let iconc = document.getElementById('close');
@@ -15,15 +14,14 @@ document.getElementById('btn-menu').addEventListener('click', () => {
                 iconb.classList.add('validacion');
         }
 });
-/* Dark style */
 window.onload = () => {
         new DarkMode();
 }
 class DarkMode{
         constructor(){
-                this.change = document.getElementById('changeMode');
-                this.body = document.getElementsByTagName('body');
-                this.addEvents(); 
+               this.change = document.getElementById('changeMode');
+               this.body = document.getElementsByTagName('body');
+               this.addEvents(); 
         }
         addEvents(){
                 this.change.addEventListener('click', () => {

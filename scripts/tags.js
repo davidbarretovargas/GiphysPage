@@ -5,7 +5,15 @@ let trendingTags = () => {
         trendGif.json().then((trendGif) => {
             trendSection.innerHTML = `
             <h2>Trending</h2>
-            <div><p class='tag' onclick='tagSearch()'>${trendGif.data[0]}</p> <span>,</span> <p class='tag' onclick='tagSearch()'>${trendGif.data[1]}</p> <span>,</span> <p class='tag' onclick='tagSearch()'>${trendGif.data[2]}</p> <span>,</span> <p class='tag' onclick='tagSearch()'>${trendGif.data[3]}</p> <span>,</span> <p class='tag' onclick='tagSearch()'>${trendGif.data[4]}</p> <span>,</span> <p class='tag' onclick='tagSearch()'>${trendGif.data[5]}</p></div>`
+            <div><p class='tag' onclick='tagSearch()'>${trendGif.data[0]}</p> 
+                <span>,</span> 
+                <p class='tag' onclick='tagSearch()'>${trendGif.data[1]}</p> 
+                <span>,</span> 
+                <p class='tag' onclick='tagSearch()'>${trendGif.data[2]}</p> 
+                <span>,</span> <p class='tag' onclick='tagSearch()'>${trendGif.data[3]}</p> 
+                <span>,</span> <p class='tag' onclick='tagSearch()'>${trendGif.data[4]}</p> 
+                <span>,</span> <p class='tag' onclick='tagSearch()'>${trendGif.data[5]}</p>
+            </div>`
         });
     });
 }
@@ -22,7 +30,6 @@ let tagSearch = () => {
         gifData.data.forEach(gif => {
             createHtml(gif);
             allGifs.push(new Gif (gif.images.preview_gif.url, gif.images.downsized.url, gif.id, gif.title, gif.username));
-    
         });     
     });    
 }

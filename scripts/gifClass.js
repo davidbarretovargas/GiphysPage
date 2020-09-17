@@ -1,4 +1,6 @@
 var allGifs = [];
+//console.log(allGifs);
+
 class Gif {
 	constructor(image, preview, id, title, username) {
 		this.id = id;
@@ -7,6 +9,7 @@ class Gif {
 		this.title = title;
 		this.username = username;
 		this.favorite = false;
+		// this.addGifs();
 	}
 	addGifs() {
 		allGifs.push(this);

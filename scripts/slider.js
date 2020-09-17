@@ -62,7 +62,7 @@ let createTrending = (gifs) => {
     slickDiv.appendChild(div);
     let trendingSection = document.querySelector('#track');
     trendingSection.insertAdjacentElement('beforeend', slickDiv);
-} 
+}
 trending();
 const buttonPrev = document.getElementById('button-prev');
 const buttonNext = document.getElementById('button-next');

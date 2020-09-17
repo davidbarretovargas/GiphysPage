@@ -1,4 +1,3 @@
-//VARIABLES SECCIONES DEL DOM
 let principal_section= document.getElementById('principal_section');
 let trending_section = document.getElementById('trending_section');
 let results_section = document.getElementById('results');
@@ -8,8 +7,7 @@ let misGifos = document.getElementById('misGifos');
 let carousel = document.getElementById('carousel');
 let createGifos = document.getElementById('createGifos');
 let result_search_container = document.getElementById('results');
-let result_search_section = document.getElementById('result_search_section'); 
-// FUNCION PARA LIMPIAR EL DOM
+let result_search_section = document.getElementById('result_search_section');
 let clean_sections=()=> {
     principal_section.classList.remove('show');
     principal_section.classList.add('hide');
@@ -30,7 +28,6 @@ let clean_sections=()=> {
     result_search_section.classList.add('hide');
     result_search_section.classList.remove('show');
 }
-//FUNCION MOSTRAR SECCION DESEADA
 let btn_home = document.getElementById('logo');
 btn_home.addEventListener('click', ()=>{
     event.preventDefault();
@@ -47,7 +44,6 @@ btn_home.addEventListener('click', ()=>{
     result_search_section.classList.add('show');
     result_search_section.classList.remove('hide');
 });
-//SECCION FAVORITOS
 let btn_favoritos = document.getElementById('btnfavorite');
 btn_favoritos.addEventListener('click', ()=>{
     event.preventDefault();
@@ -55,7 +51,6 @@ btn_favoritos.addEventListener('click', ()=>{
     favorite.classList.remove('hide'); 
     favorite.classList.add('show');
 });
-// SECCION MIS GIFOS
 let btn_mis_gifos = document.getElementById('btnmisGifos');
 btn_mis_gifos.addEventListener('click', ()=>{
     event.preventDefault();
@@ -65,7 +60,6 @@ btn_mis_gifos.addEventListener('click', ()=>{
     misGifos.classList.add('show');
     creaMisGifos();
 });
-//SECCION CREAR GIFOS
 let btn_create = document.getElementById('btncreateGifos');
 btn_create.addEventListener('click', ()=>{
     event.preventDefault();

@@ -1,4 +1,3 @@
-//ACCEDIENDO A LOS ELEMENTOS
 let window_video = document.getElementById('window_video');
 let btn_video = document.getElementById('btn_start');
 let window_preview = document.getElementById('window_preview');
@@ -8,7 +7,8 @@ let is_recording = false;
 let recorder;
 let btn_repeat = document.getElementById('btn_repeat');
 let temporizador = document.getElementById('temporizador');
-//MARCADORES PASO A PASO 
+let btnDowloadGif = document.getElementById('btnDowloadGif');
+let linkMyGif = document.getElementById('linkMyGif');
 let btn_1 = document.getElementById('btn_1');
 let btn_2 = document.getElementById('btn_2');
 let btn_3 = document.getElementById('btn_3');
@@ -23,7 +23,6 @@ function btn_blancos (){
     btn_3.classList.remove('morado');
     num3.classList.remove('blanco');
 } 
-//EVENTOS PARA EL BOTON
 btn_video.addEventListener('click', ()=>{
     switch(btn_video.textContent){
         case 'COMENZAR':
@@ -59,7 +58,6 @@ btn_video.addEventListener('click', ()=>{
             break;
     }
 });
-//BOTON REPETIR GRABACION
 btn_repeat.addEventListener('click',()=>{
     startdivice();
     btn_video.textContent = 'GRABAR';
@@ -67,15 +65,12 @@ btn_repeat.addEventListener('click',()=>{
     window_preview.classList.add('hide');
     btn_repeat.classList.add('hide');
 });
-// INICIO CAMARA 
-const startdivice = ()=>{ //btn comenzar
+const startdivice = ()=>{
     navigator.mediaDevices.getUserMedia({video: true, audio: false}).then((stream)=>{
         window_video.srcObject = stream;
         window_video.play();
     });
-    
 };
-// FINALIZAR CAMARA 
 const stopdivice = async(recorder)=>{
     stream.getTracks().forEach(function(track) {
         track.stop();
@@ -85,21 +80,18 @@ const stopdivice = async(recorder)=>{
         window_video.load();
     });
 };
-//INICIAR GRABACION
 const startrecord = ()=>{
     recorder = new RecordRTC(window_video.srcObject, {
         type: 'gif',
         frameRate: 1,
         quality: 10,
         width: 360,
-        height: 240, //verificar que si sea height y no hidden 
+        height: 240,
     });
     recorder.startRecording();
     is_recording = true;
     timer();
-    
 };
-//DETENER GRABACION
 const stoprecord = () =>{
     recorder.stopRecording();
     is_recording=false
@@ -110,16 +102,12 @@ const stoprecord = () =>{
     stopDivice();
     clearTimeout(t);
 };
-//DETENER/APAGAR CAMARA
 const stopDivice = ()=>{
     let tracks = window_video.srcObject.getTracks();
 	tracks[0].stop();
 };
-
-//FUNCION SUBIR GIFO
 let uploadGifo = () =>{
     btn_video.hidden=true;
-    //ToDo div con transparencia 'cargando'
     var form = new FormData();
     form.append('api_key','IkuYt6UrCtsIzd7Oj3xL7o32GrO1B6Ud');
     form.append('file',recorder.getBlob(),'misGifos.gif');
@@ -129,16 +117,25 @@ let uploadGifo = () =>{
     }).then((resp)=>{
         resp.json().then((data)=>{
             btn_video.textContent = 'COMENZAR';
-            //ToDo retirar el texto y colocar 'carga exitosa';
             let misGifos = localStorage.getItem('misGifos') == null?[]:localStorage.getItem('misGifos').split(',');
             misGifos.push(data.data.id);
+            console.log(misGifos);
             localStorage.setItem('misGifos',misGifos);
             uploading_img.classList.add('hide');
             upload_img.classList.remove('hide');
+            localStorage.setItem('resentUp',data.data.id);
         });
     });
 }
-
+btnDowloadGif.addEventListener('click', () => {
+    descargarGif(URL.createObjectURL(recorder.getBlob()),'nuevoGif.gif');
+});
+linkMyGif.addEventListener('click',()=>{
+    var link = document.createElement('a');
+    link.target='blank';
+    link.href=`https://giphy.com/gifs/${localStorage.getItem('resentUp')}`;
+    link.click();
+});
 function add() {
     seconds++;
     if (seconds >= 60) {
@@ -149,9 +146,7 @@ function add() {
             hours++;
         }
     }
-    
     temporizador.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
-
     timer();
 }
 let t;

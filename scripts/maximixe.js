@@ -48,7 +48,5 @@ const maximixeGif = (gif) => {
 	});
 };
 const closeModal = () => {
-    
     modal.style.display = 'none';
-	
 };

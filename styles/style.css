@@ -134,7 +134,7 @@ header .full-menu ul li a {
   text-decoration: none;
 }
 
-header .full-menu ul span {
+header .full-menu ul .span {
   opacity: 0.5;
   width: 41px;
   border-bottom: 1px solid #ffffff;
@@ -192,7 +192,6 @@ main .principal-section .principal-container .principal-container-input {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  /* flex-flow: column; */
 }
 
 main .principal-section .principal-container .principal-container-input input {
@@ -200,7 +199,6 @@ main .principal-section .principal-container .principal-container-input input {
   width: 334px;
   height: 50px;
   border: 1px solid #572EE5;
-  /* border-bottom: none; */
   border-radius: 27px;
   padding: 0 0 10px 30px;
 }
@@ -210,12 +208,8 @@ main .principal-section .principal-container .principal-container-input input:fo
 }
 
 main .principal-section .principal-container .principal-container-input a {
-  /*  margin-left: 270px; */
-  /* margin-rigth: 270px; */
   margin-left: -45px;
   z-index: 200;
-  /* position: relative;
-                    margin-top: -36px; */
 }
 
 main .principal-section .principal-container .principal-container-input a img {
@@ -224,16 +218,16 @@ main .principal-section .principal-container .principal-container-input a img {
   width: 20px;
 }
 
+main .principal-section .principal-container .principal-container-input a .close {
+  display: none;
+  padding: 2px;
+}
+
 main .principal-section .principal-container .suggestion-container {
   display: none;
-  /* display: flex;
-                justify-content: center;
-                align-items: center; */
   left: 12px;
   position: relative;
   width: 334px;
-  /* top: 84px;
-                left: -483px; */
   border: 1px solid #572EE5;
   border-top: none;
   border-radius: 0 0 27px 27px;
@@ -325,9 +319,6 @@ main .trending-section .trending-container div span {
 }
 
 main .result-search-section {
-  /* grid-template-columns: 1fr 1fr;
-        // display: flex; // hay que dejar este unicamente para que se pueda mostrar
-        row-gap: 15px; */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -424,7 +415,6 @@ main .result-search-section .result-search-container .item .overlay .text-overla
 }
 
 main .result-search-section .btn {
-  /* display: none; */
   border: 1px solid #572EE5;
   border-radius: 25px;
   padding: 20px;
@@ -594,9 +584,6 @@ main .carousel .slick-list .slick-track .slick img {
   transition: .3s ease-in-out;
   height: 187px;
   scroll-snap-align: center;
-  /* &:hover{
-                            opacity: .85;
-                        } */
 }
 
 main .carousel .slick-list .slick-track .slick .overlay-slider {
@@ -634,6 +621,7 @@ main .carousel .slick-list .slick-track .slick .overlay-slider .icon-overlay-sli
   background: #ffffff;
   opacity: 0.7;
   margin: 5px;
+  cursor: pointer;
 }
 
 main .carousel .slick-list .slick-track .slick .overlay-slider .text-overlay-slider {
@@ -864,7 +852,6 @@ main .favorite .result-favorite-section .result-container {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  /* width: 1280px; */
 }
 
 main .favorite .result-favorite-section .result-container .item-favorite {
@@ -1018,7 +1005,6 @@ main .misGifos .misGifos_render .misGifos_render_container {
       -ms-flex-pack: center;
           justify-content: center;
   padding-top: 50px;
-  /* width: 1280px; */
 }
 
 main .misGifos .misGifos_render .misGifos_render_container .item-gifos {
@@ -1361,9 +1347,6 @@ main .createGifos .createGifos-container .container-top .container-createGifos-b
   -webkit-box-direction: normal;
       -ms-flex-flow: column;
           flex-flow: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   width: 630px;
   height: 330px;
   background: #572ee599;
@@ -1376,6 +1359,37 @@ main .createGifos .createGifos-container .container-top .container-createGifos-b
   color: #ffffff;
   text-align: center;
   font-family: "Roboto", sans-serif;
+}
+
+main .createGifos .createGifos-container .container-top .container-createGifos-box .createGifos-box .video_cointainer .upload_img .icons-upload {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 100px;
+}
+
+main .createGifos .createGifos-container .container-top .container-createGifos-box .createGifos-box .video_cointainer .upload_img .icons-upload img {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: #ffffff;
+  opacity: 0.7;
+  margin: 5px;
+}
+
+main .createGifos .createGifos-container .container-top .container-createGifos-box .createGifos-box .video_cointainer .upload_img .icons-upload img:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+main .createGifos .createGifos-container .container-top .container-createGifos-box .createGifos-box .video_cointainer .upload_img .icons-upload .img2 {
+  padding: 5px;
 }
 
 main .createGifos .createGifos-container .container-top .container-createGifos-box .container-createGifos-bottom {
@@ -1587,6 +1601,12 @@ footer .footer-copy {
     background-color: inherit;
     -webkit-transition: inherit;
     transition: inherit;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
   header .full-menu ul {
     -webkit-box-orient: horizontal;
@@ -1599,7 +1619,7 @@ footer .footer-copy {
     font-size: 13px;
     font-weight: bold;
   }
-  header .full-menu ul .add {
+  header .full-menu .add {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1684,11 +1704,11 @@ footer .footer-copy {
   header .full-menu ul li a:active {
     color: #9CAFC3;
   }
-  header .full-menu ul .add:hover {
+  header .full-menu div .add:hover {
     background: #572EE5;
     background-image: url(../assets/CTA-crear-gifo-hover.svg);
   }
-  header .full-menu ul .add:active {
+  header .full-menu div .add:active {
     background: #9CAFC3;
     background-image: url(../assets/CTA-crear-gifo-active.svg);
   }

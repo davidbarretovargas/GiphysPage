@@ -9,15 +9,23 @@ async function getGifByTitle(title) {
 let input = document.getElementById('gifTitle');
 let results = document.getElementById('results');
 let btnSearch = document.getElementById('search');
-//busqueda con el clic en el icono
+let closeSearch = document.getElementById('closeSearch');
 btnSearch.addEventListener('click',()=>{
-    search();
+        search();
 });
+closeSearch.addEventListener("click", (e)=>{
+    if(e.target.src.includes('close.svg'))
+        input.value="";
+    });
 let search = () => {
     let gifTitle = input.value;
     document.querySelector('.search-title').innerHTML= input.value;
     document.querySelector('#results').innerHTML='';
     if(gifTitle === ''){
+        if(closeSearch.src.includes('close.svg')){
+            clearBtnSearch();
+            return;
+        }
         alert('Ingrese el nombre de un GIF para buscar');
     } else{
         getGifByTitle(gifTitle).then((gifData) => {
@@ -30,9 +38,10 @@ let search = () => {
                 allGifs.push(new Gif (gif.images.downsized.url, gif.images.preview_gif.url, gif.id, gif.title, gif.username));
             });            
         });
+
+        
     }
 }
-// FUNCION DE AGREGAR BOTÓN
 let buttonAdd = () => {
     let div = document.querySelector('.result-search-section');
     let button = document.createElement('button');
@@ -43,7 +52,6 @@ let buttonAdd = () => {
     div.insertAdjacentElement('beforeend',button);
 }
 let limitBtn = 12;
-
 let limitFunction = () => {
     limitBtn+=12;
     seeMore();
@@ -58,21 +66,18 @@ let seeMore = () => {
         let gifData = await response.json();
         return gifData;
     }
-    getGifByTitleVerMas(gifTitle).then((gifData) => {
-        let button = document.querySelector('.btn');
-        
-        if(button == null) {
-            buttonAdd();
-        }
-        gifData.data.forEach(gif => {
-            createHtml(gif);
-            allGifs.push(new Gif (gif.images.preview_gif.url, gif.images.downsized.url, gif.id, gif.title, gif.username));
-        });            
-    });
+        getGifByTitleVerMas(gifTitle).then((gifData) => {
+            let button = document.querySelector('.btn');
+            if(button == null) {
+                buttonAdd();
+            }
+            gifData.data.forEach(gif => {
+                createHtml(gif);
+                allGifs.push(new Gif (gif.images.preview_gif.url, gif.images.downsized.url, gif.id, gif.title, gif.username));
+            });            
+        });
 }
-// FUNCIONES PARA LLAMADOS A LA API
 let getUrlImage = (urlImage) => {
-    // console.log(urlImage.images.preview_webp.url);
     if (urlImage.images.preview_gif.url) {
             return urlImage.images.preview_gif.url;          
     } else {
@@ -137,38 +142,47 @@ let createHtml = (information) =>{
     out.appendChild(divItem);
     out.insertAdjacentElement('beforeend', divItem);
 }
-// LLAMADO A LA API SUGERENCIAS DE BUSQUEDA
 let search_input_enter = document.getElementById('gifTitle');
 search_input_enter.addEventListener("keyup",(event)=>{
+    clearBtnSearch();
+});
+let clearBtnSearch =()=>{
+    if(input.value==""){
+        closeSearch.setAttribute('src', './assets/icon-search.svg');
+    }
     if (event.keyCode === 13){
         document.querySelector('.search-title').innerHTML= input.value;    
         search();
         return;
     } 
-    if(search_input_enter.value == '') {
+    else if(search_input_enter.value == '') {
         document.querySelector('.suggestions').innerHTML = '';
-        suggestion_container.style.display =''
-    }else{
+        suggestion_container.style.display ='';
+ 
+    }
+    else{
         suggest();
     }
-});
+}
 let suggestion_container = document.querySelector('.suggestion-container');
 let suggest = ()=>{
     let term = input.value;
     if(term != ''){
+        console.log('estoy en el primer if');
         suggestion_container.style.display = 'block';
+        closeSearch.setAttribute('src', './assets/close.svg');
+        closeSearch.style.padding = '3px';
     }
     fetch(`https://api.giphy.com/v1/tags/related/${term}?api_key=IkuYt6UrCtsIzd7Oj3xL7o32GrO1B6Ud&limit=4`)
     .then(response=>{
         response.json().then(data=>{
             console.log(data);
-            
             document.querySelector('.suggestions').innerHTML = '';
-        for (let i = 0; i < data.data.length; i++) {
-            createSuggestions(data.data[i].name);   
-        }       
+            for (let i = 0; i < data.data.length; i++) {
+                createSuggestions(data.data[i].name);
+            }
+        });
     });
-});
 }
 let getsearch = ()=>{
     let search_value = event.target.childNodes[1];
@@ -182,10 +196,10 @@ let getsearch = ()=>{
         }
         gifData.data.forEach(gif => {
             createHtml(gif);
-            allGifs.push(new Gif (gif.images.downsized.url, gif.images.preview_gif.url, gif.id, gif.title, gif.username));
+            allGifs.push(new Gif (gif.images.downsized.url, gif.images.preview_gif.url, gif.id, gif.title, gif.username)); 
         });            
     });
-    suggestion_container.style.display = '';
+    suggestion_container.style.display = ''; // limpia la sugerencia
 }
 let createSuggestions = (data) => {
     let imgIcon = document.createElement('img');

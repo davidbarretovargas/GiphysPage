@@ -2,14 +2,20 @@ let favorites = document.getElementById('favorite');
 let favoritesResults = document.getElementById('favorite-results');
 let noResultsFavContainer = document.getElementById('description-empty-favorite-section');
 let favoritesLimit = 100;
+
+
 const addFavorite = (id) => {
 	console.log('el evento a la escucha funciona');
 	let button = event.target;
+	// let atribute = button.getAttribute('src');
+
 	button.src = './assets/icon-fav-active.svg';
 	button.style.padding = '6px';
+
 	let filter = allGifs.filter((gif) => {
 		return gif.id === id;
 	});
+
 	if(filter[0].favorite === true) {
 		button.src="./assets/icon-fav-hover.svg";
 		button.style.padding = '0px';
@@ -17,6 +23,7 @@ const addFavorite = (id) => {
 	} else{
 		filter[0].addFavorite();
 	}
+
 	renderFavorites();
 	let favoriteSection = document.getElementById('favorite-results')
 	let emptySection = document.querySelector('.description-empty-favorite-section');
@@ -24,6 +31,7 @@ const addFavorite = (id) => {
 		emptySection.style.display = 'none'
 	}
 };
+
 const renderFavorites = () => {
 	favoritesResults.innerHTML = '';
 	let favorites = allGifs.filter((gif) => {
@@ -50,7 +58,9 @@ const renderFavorites = () => {
 			favoritesResults.insertAdjacentHTML('beforeend', template);
 		}
 	});
+
 };
+
 const removeFavorite = (id) => {
 	let filter = allGifs.filter((gif, i) => {
 		return gif.id === id;
@@ -58,6 +68,8 @@ const removeFavorite = (id) => {
 	filter[0].removeFavorite();
 	renderFavorites();
 };
+
+
 async function descargarGif(url, nombre) {
 	await fetch(url).then((img)=> {
 		img.blob().then((file)=>{
